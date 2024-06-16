@@ -11,6 +11,17 @@
 <h3>GET : /menu/regist</h3>
 <button onclick="location.href='/menu/regist'">GET 메뉴 등록 요청</button>
 
+<!--location.href 는 현재 브라우저 주소를 나타냄-->
+<!--클릭을 하면 location.href 에 /menu/regist 의 url 이 담기고 이쪽으로 이동하게 됨-->
+<!--**HTTP 요청 발생 : 브라우저가 /menu/regist url로 이동하면서 해당 url 로 get 요청을 보냄-->
+<!--**서버는 /menu/regist 경로에 대한 요청을 받고 spring mvc 컨트롤러는 이 요청을 처리하기 위해 regist Menu 메소드 호출-->
+<!--registMenu 메소드는 Model 객체에서 메시지를 추가하고 MappingResult 뷰를 반환-->
+<!--**뷰 렌더링: Spring MVC 는 mappingResult 뷰를 찾아 렌더링, Thymeleaf 템플릿 엔진을 사용하면 mappingResult.html 파일에서-->
+<!--Model 객체에 추가된 메세지를 표시함-->
+<!--이동하게 되면 get 가게 되고 mappingResult.html 의 /menu/regist view 를 렌더링함-->
+
+
+
 <h3>POST : /menu/regist</h3>
 <form action="/menu/regist" method="post">
     <button type="submit">POST 메뉴 등록 요청</button>
