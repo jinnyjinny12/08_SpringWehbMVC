@@ -22,11 +22,16 @@ public class IndexController {
 
     @GetMapping("/submitOption")
     public ModelAndView mission02(ModelAndView mv, @RequestParam("pathValue") String value,String selectedOption, RedirectAttributes rttr) {
-        rttr.addFlashAttribute("message", value);
-
+        if ("Option2".equals(selectedOption)) {
+            rttr.addFlashAttribute("flashMessage2", "경고: 잘못된 선택입니다");
+            mv.setViewName("redirect:/");
+            return mv;
+        }
+        mv.addObject("selectedOption", selectedOption);
+        mv.addObject("message", value);
+        mv.setViewName("mission01");
+        return mv;
     }
-
-
 
 
 }
