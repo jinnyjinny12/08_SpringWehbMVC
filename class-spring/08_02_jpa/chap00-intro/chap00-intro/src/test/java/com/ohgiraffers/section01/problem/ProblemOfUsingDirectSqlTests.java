@@ -78,22 +78,25 @@ class ProblemOfUsingDirectSqlTests {
     @DisplayName("직접 SQL을 작성하여 신규 메뉴를 추가할 때 발생하는 문제확인")
     @Test
     void testDirectInsertSql() throws SQLException {
-
+        // 신규 메뉴 객체 생성 및 값 설정
         Menu menu = new Menu();
         menu.setMenuName("민트초코짜장면");
         menu.setMenuPrice(12000);
         menu.setCategoryCode(1);
         menu.setOrderableStatus("Y");
 
+        // SQL 쿼리
+        String query = "INSERT INTO TBL_MENU VALUES (MENU_NAME, MENU_PRICE, CATEGORY_CODE, ORDERABLE_STATUS) VALUES (?, ?, ?, ?)";
 
-        String query = "INSET INTO TBL_MENU VALUES (MENU_NAME, MENU_PRICE, CATEGORY_CODE, ORDERABLE_STATUS) VALUES (?, ?, ?, ?)";
-
+        // preparedstatement 를 생성해서 menu 객체의 값을 바인딩함
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, menu.getMenuName());
         pstmt.setInt(2, menu.getMenuPrice());
         pstmt.setInt(3, menu.getCategoryCode());
         pstmt.setString(4, menu.getOrderableStatus());
 
+        // executeUpdate 를 통해 메서드를 호출해서 쿼리를 실행
+        // result 가 1인지 확인해서 메뉴가 성공적으로 삽입되었는지 검증
         int result = pstmt.executeUpdate();
         Assertions.assertEquals(1, result);
         pstmt.close();
